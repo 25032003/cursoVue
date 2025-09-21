@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Conceptos Básicos de Componentes en Vue (corregido)</title>
+  <!-- Build que incluye el compilador -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Ejemplo de Componente Reutilizable</h2>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+
+    <h2>Ejemplo con Props (Blog Posts)</h2>
+    <div :style="{ fontSize: postFontSize + 'em' }">
+      <blog-post
+        v-for="post in posts"
+        :key="post.id"
+        :post="post"
+        @enlarge-text="onEnlargeText"
+      ></blog-post>
+    </div>
+
+    <h2>Ejemplo con Slots</h2>
+    <alert-box>
+      Algo ha ocurrido mal. Revise los datos ingresados.
+    </alert-box>
+  </div>
+
+  <script>
+    // Componente contador reutilizable
+    Vue.component('button-counter', {
+      data: function () {
+        return { count: 0 }
+      },
+      template: '<button @click="count++">Me ha pulsado {{ count }} veces.</button>'
+    });
+
+    // Componente blog-post con props y $emit
+    Vue.component('blog-post', {
+      props: ['post'],
+      template: `
+        <div class="blog-post" style="border:1px solid #ddd; padding:8px; margin:8px 0;">
+          <h3>{{ post.title }}</h3>
+          <button @click="$emit('enlarge-text', 0.1)">Agrandar texto</button>
+          <div v-html="post.content"></div>
+        </div>
+      `
+    });
+
+    // Componente con slot
+    Vue.component('alert-box', {
+      template: `
+        <div style="border:1px solid red; padding:10px; margin:10px 0;">
+          <strong>Error:</strong>
+          <slot></slot>
+        </div>
+      `
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        postFontSize: 1,
+        posts: [
+          { id: 1, title: 'Mi viaje con Vue', content: '<p>Este es mi primer post usando Vue.</p>' },
+          { id: 2, title: 'Blogging con Vue', content: '<p>Vue hace que el desarrollo sea divertido.</p>' },
+          { id: 3, title: 'Por qué Vue es tan genial', content: '<p>La simplicidad y potencia de Vue lo hacen único.</p>' }
+        ]
+      },
+      methods: {
+        onEnlargeText(amount) { this.postFontSize += amount }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Manejo de eventos con Vue</title>
+  <!-- Cargar Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Ejemplo 1: Contador en línea</h2>
+    <button v-on:click="counter += 1">Add 1</button>
+    <p>Se ha hecho clic en el botón {{ counter }} veces.</p>
+
+    <h2>Ejemplo 2: Método como manejador</h2>
+    <button v-on:click="saludar">Saludar</button>
+
+    <h2>Ejemplo 3: Pasar parámetros al método</h2>
+    <button v-on:click="di('hola')">Di hola</button>
+    <button v-on:click="di('qué')">Di qué</button>
+
+    <h2>Ejemplo 4: Usando modificadores</h2>
+    <!-- Este botón solo se ejecuta una vez -->
+    <button v-on:click.once="hazEsto">Haz clic una sola vez</button>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        counter: 0,
+        name: 'Vue.js'
+      },
+      methods: {
+        saludar: function (event) {
+          alert('Hola ' + this.name + '!');
+          if (event) {
+            alert("Elemento: " + event.target.tagName);
+          }
+        },
+        di: function (mensaje) {
+          alert(mensaje);
+        },
+        hazEsto: function () {
+          alert("Este mensaje solo aparece una vez!");
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <!-- versión de desarrollo, incluye advertencias de ayuda en la consola -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <style>
+    .active {
+      font-weight: bold;
+      color: green;
+    }
+    .text-danger {
+      color: red;
+    }
+    .box {
+      padding: 10px;
+      border: 2px solid black;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>🔗 Enlace de Clases y Estilos</h2>
+
+    <!-- Sintaxis de Objeto -->
+    <div class="box" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+      Sintaxis de Objeto → isActive: {{ isActive }}, hasError: {{ hasError }}
+    </div>
+
+    <!-- Sintaxis con objeto en data -->
+    <div class="box" v-bind:class="classObject">
+      Sintaxis con classObject en data
+    </div>
+
+    <!-- Sintaxis de Computed -->
+    <div class="box" v-bind:class="computedClasses">
+      Sintaxis con propiedad computada
+    </div>
+
+    <!-- Sintaxis de Array -->
+    <div class="box" v-bind:class="[activeClass, errorClass]">
+      Sintaxis de

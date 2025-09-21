@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Renderización Condicional</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>⚡ Renderización Condicional</h2>
+
+    <!-- v-if / v-else -->
+    <h3>Ejemplo básico con v-if y v-else</h3>
+    <button @click="ok = !ok">Alternar ok ({{ ok }})</button>
+    <h1 v-if="ok">Sí</h1>
+    <h1 v-else>No</h1>
+
+    <!-- v-else-if -->
+    <h3>Ejemplo con v-else-if</h3>
+    <button @click="cambiarTipo">Cambiar tipo (actual: {{ type }})</button>
+    <div v-if="type === 'A'">A</div>
+    <div v-else-if="type === 'B'">B</div>
+    <div v-else-if="type === 'C'">C</div>
+    <div v-else>No es A, B ni C</div>
+
+    <!-- <template> con v-if -->
+    <h3>Grupo condicional con &lt;template&gt;</h3>
+    <button @click="mostrar = !mostrar">Alternar mostrar ({{ mostrar }})</button>
+    <template v-if="mostrar">
+      <h4>Título Condicional</h4>
+      <p>Este párrafo aparece solo si mostrar es true.</p>
+      <p>También este segundo párrafo.</p>
+    </template>
+
+    <!-- key en inputs -->
+    <h3>Ejemplo con key en inputs</h3>
+    <button @click="alternarLogin">Alternar loginType ({{ loginType }})</button>
+    <template v-if="loginType === 'username'">
+      <label>Nombre de Usuario</label>
+      <input placeholder="Ingrese su nombre de usuario" key="username-input">
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Ingrese su email" key="email-input">
+    </template>
+
+    <!-- v-show -->
+    <h3>Ejemplo con v-show</h3>
+    <button @click="ok2 = !ok2">Alternar ok2 ({{ ok2 }})</button>
+    <h1 v-show="ok2">¡Hola con v-show!</h1>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        ok: true,
+        mostrar: true,
+        type: 'A',
+        loginType: 'username',
+        ok2: true
+      },
+      methods: {
+        cambiarTipo() {
+          if (this.type === 'A') this.type = 'B'
+          else if (this.type === 'B') this.type = 'C'
+          else if (this.type === 'C') this.type = 'X'
+          else this.type = 'A'
+        },
+        alternarLogin() {
+          this.loginType = this.loginType === 'username' ? 'email' : 'username'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

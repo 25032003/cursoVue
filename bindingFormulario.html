@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Binding en Formularios con Vue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Ejemplos de Binding con v-model</h2>
+
+    <!-- Input de texto -->
+    <h3>Input de Texto</h3>
+    <input v-model="message" placeholder="Escribe un mensaje">
+    <p>El mensaje es: {{ message }}</p>
+
+    <!-- Textarea -->
+    <h3>Textarea</h3>
+    <textarea v-model="multiline" placeholder="Escribe varias líneas"></textarea>
+    <p style="white-space: pre-line;">{{ multiline }}</p>
+
+    <!-- Checkbox -->
+    <h3>Checkbox</h3>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">¿Acepta los términos?</label>
+    <p>Estado: {{ checked }}</p>
+
+    <!-- Múltiples Checkboxes -->
+    <h3>Múltiples Checkboxes</h3>
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <p>Nombres seleccionados: {{ checkedNames }}</p>
+
+    <!-- Radios -->
+    <h3>Radio Buttons</h3>
+    <input type="radio" id="uno" value="Uno" v-model="picked">
+    <label for="uno">Uno</label>
+    <input type="radio" id="dos" value="Dos" v-model="picked">
+    <label for="dos">Dos</label>
+    <p>Elegiste: {{ picked }}</p>
+
+    <!-- Select -->
+    <h3>Select</h3>
+    <select v-model="selected">
+      <option disabled value="">Seleccione una opción</option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <p>Seleccionado: {{ selected }}</p>
+
+    <!-- Select múltiple -->
+    <h3>Select Múltiple</h3>
+    <select v-model="multiSelected" multiple>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <p>Seleccionados: {{ multiSelected }}</p>
+
+    <!-- Select dinámico -->
+    <h3>Select con opciones dinámicas</h3>
+    <select v-model="dynamicSelected">
+      <option v-for="option in options" :value="option.value">
+        {{ option.text }}
+      </option>
+    </select>
+    <p>Seleccionado: {{ dynamicSelected }}</p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: '',
+        multiline: '',
+        checked: false,
+        checkedNames: [],
+        picked: '',
+        selected: '',
+        multiSelected: [],
+        dynamicSelected: 'A',
+        options: [
+          { text: 'Uno', value: 'A' },
+          { text: 'Dos', value: 'B' },
+          { text: 'Tres', value: 'C' }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
