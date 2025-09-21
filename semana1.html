@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proyecto Vue: Computed vs Methods</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>👤 Bienvenida dinámica con Vue</h2>
+
+    <!-- Campo de entrada -->
+    <input v-model="name" placeholder="Escribe tu nombre">
+
+    <h3>Usando propiedad computada:</h3>
+    <p>{{ welcomeMessageComputed }}</p>
+
+    <h3>Usando método:</h3>
+    <p>{{ welcomeMessageMethod() }}</p>
+
+    <small>
+      (Abre la consola y verás cuándo se ejecuta cada uno 😉)
+    </small>
+  </div>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        name: ""
+      },
+      computed: {
+        // ✅ Propiedad computada: solo se recalcula si cambia "name"
+        welcomeMessageComputed() {
+          console.log("Recalculando propiedad computada...");
+          return this.name
+            ? `¡Bienvenido, ${this.name}!`
+            : "Por favor ingresa tu nombre.";
+        }
+      },
+      methods: {
+        // ⚠️ Método: se ejecuta SIEMPRE que el template se re-renderiza
+        welcomeMessageMethod() {
+          console.log("Ejecutando método...");
+          return this.name
+            ? `¡Bienvenido, ${this.name}!`
+            : "Por favor ingresa tu nombre.";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejemplos Vue - Enlaces y Directivas</title>
+  <!-- Vue.js (versión de producción optimizada) -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Ejemplos de Enlace de Datos y Directivas</h1>
+
+    <!-- 1. Interpolación básica -->
+    <h2>1. Interpolación básica</h2>
+    <span>Message: {{ msg }}</span>
+
+    <!-- 2. Interpolación única con v-once -->
+    <h2>2. v-once</h2>
+    <span v-once>Esto nunca cambiará: {{ msg }}</span>
+    <button @click="msg = 'Nuevo mensaje'">Cambiar mensaje</button>
+
+    <!-- 3. Texto plano vs HTML con v-html -->
+    <h2>3. HTML Puro</h2>
+    <p>Usando mustaches: {{ rawHtml }}</p>
+    <p>Usando v-html: <span v-html="rawHtml"></span></p>
+    <button @click="rawHtml = '<b>Texto en negrita!</b>'">Cambiar HTML</button>
+
+    <!-- 4. v-bind en atributos -->
+    <h2>4. Atributos dinámicos con v-bind</h2>
+    <div v-bind:id="dynamicId">Soy un DIV con id dinámico</div>
+    <button @click="dynamicId = 'nuevo-id'">Cambiar id</button>
+
+    <!-- 5. v-bind con booleanos -->
+    <h2>5. Atributos booleanos</h2>
+    <button v-bind:disabled="isButtonDisabled">Botón</button>
+    <button @click="isButtonDisabled = !isButtonDisabled">
+      Alternar disabled
+    </button>
+
+    <!-- 6. Expresiones en template -->
+    <h2>6. Expresiones JS en template</h2>
+    <p>{{ number + 1 }}</p>
+    <p>{{ ok ? 'YES' : 'NO' }}</p>
+    <p>{{ message.split('').reverse().join('') }}</p>
+    <div v-bind:id="'list-' + id">ID dinámico: list-{{ id }}</div>
+
+    <!-- 7. Directivas v-if -->
+    <h2>7. v-if</h2>
+    <p v-if="seen">Ahora me ves 👀</p>
+    <button @click="seen = !seen">Alternar v-if</button>
+
+    <!-- 8. Argumentos (v-bind y v-on) -->
+    <h2>8. Argumentos</h2>
+    <a v-bind:href="url" target="_blank">Ir al enlace</a>
+    <br>
+    <a v-on:click="doSomething" href="#">Haz click aquí</a>
+
+    <!-- 9. Modificadores -->
+    <h2>9. Modificadores</h2>
+    <form v-on:submit.prevent="onSubmit">
+      <input type="text" v-model="formInput">
+      <button type="submit">Enviar</button>
+    </form>
+
+    <!-- 10. Modo abreviado -->
+    <h2>10. Modo abreviado</h2>
+    <!-- v-bind abreviado -->
+    <a :href="url" target="_blank">Enlace con :href</a>
+    <br>
+    <!-- v-on abreviado -->
+    <button @click="doSomething">Click con @click</button>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        msg: 'Hola Vue!',
+        rawHtml: '<i>Texto en cursiva</i>',
+        dynamicId: 'mi-div',
+        isButtonDisabled: false,
+        number: 10,
+        ok: true,
+        message: 'VueJS',
+        id: 123,
+        seen: true,
+        url: 'https://vuejs.org',
+        formInput: ''
+      },
+      methods: {
+        doSomething: function () {
+          alert('¡Se ejecutó doSomething()!')
+        },
+        onSubmit: function () {
+          alert('Formulario enviado con: ' + this.formInput)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejemplos Vue</title>
+  <!-- Vue.js (versión de desarrollo con advertencias en consola) -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!-- Ejemplo 1: Instancia básica -->
+  <div id="app1">
+    <h2>Ejemplo 1: Instancia básica</h2>
+    <p>{{ message }}</p>
+  </div>
+
+  <!-- Ejemplo 2: Reactividad -->
+  <div id="app2">
+    <h2>Ejemplo 2: Reactividad</h2>
+    <p>El valor de a es: {{ a }}</p>
+    <button v-on:click="a++">Incrementar a</button>
+  </div>
+
+  <!-- Ejemplo 3: Métodos -->
+  <div id="app3">
+    <h2>Ejemplo 3: Métodos</h2>
+    <p>{{ saludo }}</p>
+    <button v-on:click="cambiarSaludo">Cambiar Saludo</button>
+  </div>
+
+  <!-- Ejemplo 4: Propiedades de instancia -->
+  <div id="app4">
+    <h2>Ejemplo 4: Propiedades de instancia</h2>
+    <p>Dato: {{ valor }}</p>
+    <button v-on:click="valor = valor + 1">Incrementar</button>
+  </div>
+
+  <!-- Ejemplo 5: Ciclo de vida -->
+  <div id="app5">
+    <h2>Ejemplo 5: Ciclo de vida</h2>
+    <p>Revisa la consola para ver el hook "created"</p>
+    <p>Contador: {{ contador }}</p>
+    <button v-on:click="contador++">Aumentar</button>
+  </div>
+
+  <script>
+    // Ejemplo 1: Instancia básica
+    var app1 = new Vue({
+      el: '#app1',
+      data: {
+        message: 'Hola Vue!'
+      }
+    })
+
+    // Ejemplo 2: Reactividad
+    var data = { a: 1 }
+    var app2 = new Vue({
+      el: '#app2',
+      data: data
+    })
+
+    // Ejemplo 3: Métodos
+    var app3 = new Vue({
+      el: '#app3',
+      data: {
+        saludo: '¡Bienvenido!'
+      },
+      methods: {
+        cambiarSaludo: function () {
+          this.saludo = 'El saludo cambió 😀'
+        }
+      }
+    })
+
+    // Ejemplo 4: Propiedades de instancia
+    var app4 = new Vue({
+      el: '#app4',
+      data: {
+        valor: 0
+      },
+      created: function () {
+        console.log('vm.$data === data?', this.$data)
+        console.log('vm.$el === document.getElementById("app4")?', this.$el)
+      }
+    })
+
+    // Ejemplo 5: Ciclo de vida
+    var app5 = new Vue({
+      el: '#app5',
+      data: {
+        contador: 0
+      },
+      created: function () {
+        console.log('Hook created: contador inicial es ' + this.contador)
+      },
+      mounted: function () {
+        console.log('Hook mounted: el componente ya está en el DOM')
+      },
+      updated: function () {
+        console.log('Hook updated: contador cambió a ' + this.contador)
+      },
+      destroyed: function () {
+        console.log('Hook destroyed: la instancia fue eliminada')
+      }
+    })
+  </script>
+</body>
+</html>
